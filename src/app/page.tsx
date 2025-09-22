@@ -44,7 +44,7 @@ export default async function Home() {
             <div className="text-center">
               <div className="mb-8">
                 <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-blue-50 text-blue-700 ring-1 ring-blue-700/10">
-                  ✨ Welcome to my digital space
+                  ✨ Welcome to my creative space
                 </span>
               </div>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 leading-tight">
