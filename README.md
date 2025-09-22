@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ブログアプリ
 
-## Getting Started
+Supabase と Next.js で作られたモダンなブログアプリケーションです。
 
-First, run the development server:
+## 🚀 特徴
+
+- **認証システム**: Supabase Authを使用したセキュアな認証
+- **CRUD操作**: ブログ記事の作成、読み取り、更新、削除
+- **公開/下書き**: 記事のステータス管理
+- **レスポンシブデザイン**: Tailwind CSSによるモバイルファーストデザイン
+- **型安全性**: TypeScriptによる厳格な型チェック
+- **セキュリティ**: Row Level Security (RLS) による安全なデータアクセス
+
+## 🛠️ 技術スタック
+
+- **Frontend**: Next.js 14 (App Router), TypeScript, Tailwind CSS
+- **Backend**: Supabase (PostgreSQL, Authentication, RLS)
+- **Form Management**: React Hook Form + Zod
+- **Deployment**: Vercel
+
+## 📋 セットアップ
+
+### 1. 依存関係のインストール
+
+```bash
+npm install
+```
+
+### 2. Supabaseプロジェクトの設定
+
+1. [Supabase](https://supabase.com) でプロジェクトを作成
+2. SQL Editorで `supabase-setup.sql` の内容を実行
+3. プロジェクトのURLとAPIキーを取得
+
+### 3. 環境変数の設定
+
+`.env.local` ファイルを作成：
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+### 4. 開発サーバーの起動
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+ブラウザで [http://localhost:3000](http://localhost:3000) を開いてください。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📖 使い方
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **アカウント作成**: サインアップページでアカウントを作成
+2. **メール確認**: 送信された確認メールをクリック
+3. **ログイン**: サインインページでログイン
+4. **記事作成**: ダッシュボードから新規投稿を作成
+5. **記事管理**: 公開/下書きの切り替え、編集、削除が可能
 
-## Learn More
+## 🗄️ データベース構造
 
-To learn more about Next.js, take a look at the following resources:
+### profiles テーブル
+- id (UUID, Primary Key)
+- email (TEXT)
+- full_name (TEXT)
+- avatar_url (TEXT)
+- created_at, updated_at (TIMESTAMP)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### posts テーブル
+- id (UUID, Primary Key)
+- title (TEXT)
+- content (TEXT)
+- excerpt (TEXT)
+- slug (TEXT, Unique)
+- published (BOOLEAN)
+- created_at, updated_at (TIMESTAMP)
+- author_id (UUID, Foreign Key)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🚀 デプロイ
 
-## Deploy on Vercel
+### Vercelでのデプロイ
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Vercelアカウントでプロジェクトをインポート
+2. 環境変数を設定：
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+3. デプロイを実行
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 💰 コスト
+
+このアプリケーションは無料プランで運用可能：
+
+- **Supabase**: 無料プラン（50MB DB, 50,000 API calls/月）
+- **Vercel**: 無料プラン（100GB bandwidth/月）
+- **ドメイン**: 約1,000円/年（オプション）
+
+## 🔒 セキュリティ
+
+- Row Level Security (RLS) によるデータ保護
+- ユーザーは自分のデータのみアクセス可能
+- 公開記事のみ一般ユーザーが閲覧可能
+
+## 📝 ライセンス
+
+MIT License
